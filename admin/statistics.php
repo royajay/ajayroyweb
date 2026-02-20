@@ -65,7 +65,7 @@ while ($row = $result->fetch_assoc()) {
             color: #333;
         }
         .admin-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(90deg, #0052CC 0%, #0066FF 100%);
             color: #fff;
             padding: 1rem 2rem;
             display: flex;
@@ -98,7 +98,7 @@ while ($row = $result->fetch_assoc()) {
             margin-bottom: 2rem;
         }
         .content-card h2 {
-            color: #667eea;
+            color: #0052CC;
             margin-bottom: 1.5rem;
         }
         .alert {
@@ -129,7 +129,7 @@ while ($row = $result->fetch_assoc()) {
             transition: border-color 0.3s;
         }
         .stat-card:hover {
-            border-color: #667eea;
+            border-color: #0052CC;
         }
         .stat-name {
             font-size: 0.9rem;
@@ -149,19 +149,115 @@ while ($row = $result->fetch_assoc()) {
         .stat-value {
             font-size: 2rem;
             font-weight: 700;
-            color: #667eea;
+            color: #0052CC;
         }
         .stat-edit-btn {
-            background: none;
+            background: #0052CC;
             border: none;
-            color: #667eea;
+            color: #fff;
             cursor: pointer;
             font-size: 0.9rem;
-            text-decoration: underline;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
             margin-top: 1rem;
+            transition: background 0.3s;
         }
         .stat-edit-btn:hover {
-            color: #764ba2;
+            background: #003d99;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #0052CC;
+            padding-bottom: 1rem;
+        }
+        .modal-header h3 {
+            color: #0052CC;
+            margin: 0;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+        .close-btn:hover {
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #0052CC;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+        .btn-save, .btn-cancel {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .btn-save {
+            background: #0052CC;
+            color: #fff;
+        }
+        .btn-save:hover {
+            background: #003d99;
+        }
+        .btn-cancel {
+            background: #e0e0e0;
+            color: #333;
+        }
+        .btn-cancel:hover {
+            background: #d0d0d0;
         }
     </style>
 </head>
@@ -207,31 +303,76 @@ while ($row = $result->fetch_assoc()) {
         </div>
     </div>
 
-    <script>
-        function editStat(stat) {
-            const stat_value = prompt('Value:', stat.stat_value);
-            if (stat_value === null) return;
-            
-            const icon = prompt('Icon (emoji):', stat.icon);
-            if (icon === null) return;
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Statistic</h3>
+                <button type="button" class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="editForm" method="POST">
+                <input type="hidden" name="action" value="edit">
+                <input type="hidden" name="id" id="statId">
+                
+                <div class="form-group">
+                    <label for="statName">Statistic Name</label>
+                    <input type="text" id="statName" disabled>
+                </div>
+                
+                <div class="form-group">
+                    <label for="statValue">Value</label>
+                    <input type="number" id="statValue" name="stat_value" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="statIcon">Icon (emoji)</label>
+                    <input type="text" id="statIcon" name="icon" maxlength="10" placeholder="e.g., 📈 or 🎯" required>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn-save">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-            if (isNaN(stat_value) || parseInt(stat_value) < 0) {
+    <script>
+        let currentStat = null;
+
+        function editStat(stat) {
+            currentStat = stat;
+            document.getElementById('statId').value = stat.id;
+            document.getElementById('statName').value = stat.stat_name;
+            document.getElementById('statValue').value = stat.stat_value;
+            document.getElementById('statIcon').value = stat.icon;
+            document.getElementById('editModal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('editModal').classList.remove('show');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('editModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+
+        // Handle form submission
+        document.getElementById('editForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const value = document.getElementById('statValue').value;
+            if (isNaN(value) || parseInt(value) < 0) {
                 alert('Please enter a valid number');
                 return;
             }
-
-            // Create and submit form
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.innerHTML = `
-                <input type="hidden" name="action" value="edit">
-                <input type="hidden" name="id" value="${stat.id}">
-                <input type="hidden" name="stat_value" value="${stat_value}">
-                <input type="hidden" name="icon" value="${icon}">
-            `;
-            document.body.appendChild(form);
-            form.submit();
-        }
+            
+            this.submit();
+        });
     </script>
 </body>
 </html>

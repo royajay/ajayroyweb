@@ -50,13 +50,13 @@ if ($settings_result) {
             line-height: 1.6;
         }
         nav {
-            background: #1a1a1a;
-            color: #fff;
+            background: #fff;
+            color: #333;
             padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
         .nav-container {
             max-width: 1200px;
@@ -67,9 +67,18 @@ if ($settings_result) {
             align-items: center;
         }
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        .logo-text {
             font-size: 1.8rem;
             font-weight: 700;
-            color: #fff;
+            color: #333;
         }
         .nav-links {
             display: flex;
@@ -77,16 +86,16 @@ if ($settings_result) {
             list-style: none;
         }
         .nav-links a {
-            color: #fff;
+            color: #333;
             text-decoration: none;
             transition: color 0.3s;
         }
         .nav-links a:hover {
-            color: #4CAF50;
+            color: #0052CC;
         }
         .nav-links a.active {
-            color: #4CAF50;
-            border-bottom: 2px solid #4CAF50;
+            color: #0052CC;
+            border-bottom: 2px solid #0052CC;
             padding-bottom: 0.5rem;
         }
         .hamburger {
@@ -97,11 +106,11 @@ if ($settings_result) {
         .hamburger span {
             width: 25px;
             height: 3px;
-            background: #fff;
+            background: #333;
             margin: 5px 0;
         }
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0052CC 0%, #0078FF 100%);
             color: #fff;
             padding: 4rem 2rem;
             text-align: center;
@@ -117,7 +126,7 @@ if ($settings_result) {
         .btn {
             display: inline-block;
             padding: 0.8rem 2rem;
-            background: #4CAF50;
+            background: #0052CC;
             color: #fff;
             text-decoration: none;
             border-radius: 4px;
@@ -127,7 +136,7 @@ if ($settings_result) {
             font-size: 1rem;
         }
         .btn:hover {
-            background: #45a049;
+            background: #003d99;
         }
         .container {
             max-width: 1200px;
@@ -138,9 +147,34 @@ if ($settings_result) {
             padding: 2rem;
         }
         .intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .intro-text {
             font-size: 1.1rem;
-            margin-bottom: 2rem;
             line-height: 1.8;
+        }
+        .intro-text h2 {
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        .intro-text p {
+            margin-bottom: 1rem;
+        }
+        .intro-image {
+            border-radius: 8px;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .intro-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
         }
         .grid {
             display: grid;
@@ -154,7 +188,7 @@ if ($settings_result) {
             text-align: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 4px solid #667eea;
+            border-top: 4px solid #0052CC;
         }
         .card:hover {
             transform: translateY(-10px);
@@ -165,7 +199,7 @@ if ($settings_result) {
             margin-bottom: 1rem;
         }
         .card h3 {
-            color: #667eea;
+            color: #0052CC;
             margin-bottom: 1rem;
             font-size: 1.4rem;
         }
@@ -174,7 +208,7 @@ if ($settings_result) {
             line-height: 1.8;
         }
         .section-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0052CC 0%, #0066FF 100%);
             color: #fff;
             padding: 3rem 2rem;
             text-align: center;
@@ -186,19 +220,31 @@ if ($settings_result) {
         section {
             scroll-margin-top: 70px;
         }
-        #about, #services, #portfolio, #contact {
+        #about, #services, #portfolio, #contact, #statistics, #skills, #reviews {
             background: #fff;
             padding: 3rem 0;
             margin: 2rem 0;
+        }
+        #statistics, #skills, #reviews {
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+            padding: 4rem 0;
         }
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
-            align-items: center;
+            align-items: start;
+            max-height: 600px;
+            overflow-y: scroll;
+            padding-right: 0.5rem;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .about-content::-webkit-scrollbar {
+            display: none;
         }
         .about-text h3 {
-            color: #667eea;
+            color: #0052CC;
             margin-bottom: 1rem;
         }
         .about-text p {
@@ -207,6 +253,32 @@ if ($settings_result) {
         }
         .skills {
             margin-top: 2rem;
+        }
+        .skills-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .skills-image {
+            border-radius: 8px;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .skills-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            max-height: 400px;
+            object-fit: cover;
+        }
+        #skillsContainer {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
         }
         .skill-bar {
             margin-bottom: 1.5rem;
@@ -224,20 +296,26 @@ if ($settings_result) {
             overflow: hidden;
         }
         .progress {
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(90deg, #0052CC 0%, #0078FF 100%);
             height: 100%;
             border-radius: 10px;
         }
         .about-image {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 8px;
-            padding: 2rem;
             text-align: center;
-            color: #fff;
             min-height: 300px;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: sticky;
+            top: 0;
+        }
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            max-height: 400px;
+            object-fit: cover;
         }
         .stats {
             display: grid;
@@ -254,10 +332,61 @@ if ($settings_result) {
         .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
-            color: #667eea;
+            color: #0052CC;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .stat-label {
             color: #666;
+            margin-top: 0.5rem;
+        }
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .review-card {
+            background: #fafafa;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        .review-stars {
+            color: #FFC107;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.2rem;
+        }
+        .review-rating {
+            display: inline-block;
+            background: #0052CC;
+            color: #fff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        .review-text {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        .review-author {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        .review-date {
+            color: #999;
+            font-size: 0.8rem;
             margin-top: 0.5rem;
         }
         .contact-wrapper {
@@ -266,7 +395,7 @@ if ($settings_result) {
             gap: 3rem;
         }
         .contact-info h3 {
-            color: #667eea;
+            color: #0052CC;
             margin-bottom: 1.5rem;
         }
         .contact-item {
@@ -282,7 +411,7 @@ if ($settings_result) {
             font-size: 1.05rem;
         }
         .contact-item a {
-            color: #667eea;
+            color: #0052CC;
             text-decoration: none;
         }
         .contact-item a:hover {
@@ -299,7 +428,7 @@ if ($settings_result) {
             justify-content: center;
             width: 45px;
             height: 45px;
-            background: #667eea;
+            background: #0052CC;
             color: #fff;
             border-radius: 50%;
             text-decoration: none;
@@ -307,7 +436,7 @@ if ($settings_result) {
             transition: background 0.3s;
         }
         .social-links a:hover {
-            background: #764ba2;
+            background: #003d99;
         }
         .form-group {
             margin-bottom: 1.5rem;
@@ -335,7 +464,7 @@ if ($settings_result) {
         input[type="tel"]:focus,
         textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #0052CC;
         }
         textarea {
             resize: vertical;
@@ -344,12 +473,12 @@ if ($settings_result) {
         footer {
             text-align: center;
             padding: 2rem;
-            background: #1a1a1a;
+            background: linear-gradient(90deg, #0052CC 0%, #0066FF 100%);
             color: #fff;
             margin-top: 3rem;
         }
         footer a {
-            color: #4CAF50;
+            color: #66D4FF;
             text-decoration: none;
         }
         .alert {
@@ -366,6 +495,197 @@ if ($settings_result) {
             background: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
+        }
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 999;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+        .whatsapp-float:hover {
+            background-color: #20BA5A;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+        .whatsapp-float svg {
+            width: 30px;
+            height: 30px;
+            fill: #fff;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        /* Section Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.9);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        /* Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+        .animate-on-scroll.in-view {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .container.in-view {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .card {
+            transition: all 0.3s ease;
+        }
+        .card.in-view {
+            animation: zoomIn 0.6s ease-out forwards;
+        }
+        .intro-text.in-view {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+        .intro-image.in-view {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+        .stat-item.in-view {
+            animation: scaleUp 0.6s ease-out forwards;
+        }
+        .review-card.in-view {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .contact-info.in-view {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+        .skills-image.in-view {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+        .about-text.in-view {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+        .about-image.in-view {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+        /* CTA Button Styles */
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(90deg, #0052CC 0%, #0078FF 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 82, 204, 0.3);
+        }
+        .cta-btn:hover {
+            background: linear-gradient(90deg, #003d99 0%, #0052CC 100%);
+            box-shadow: 0 6px 25px rgba(0, 82, 204, 0.5);
+            transform: translateY(-2px);
+        }
+        .cta-section {
+            background: linear-gradient(135deg, #0052CC 0%, #0078FF 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-radius: 12px;
+            color: #fff;
+            margin: 2rem 0;
+        }
+        .cta-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+        .section-highlight {
+            background: linear-gradient(135deg, #0052CC15 0%, #0066FF15 100%);
+            padding: 2rem;
+            border-left: 4px solid #0052CC;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+            }
+            .whatsapp-float svg {
+                width: 28px;
+                height: 28px;
+            }
         }
         @media (max-width: 768px) {
             .hamburger {
@@ -391,6 +711,24 @@ if ($settings_result) {
             }
             .about-content {
                 grid-template-columns: 1fr;
+                max-height: 800px;
+            }
+            .intro {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .intro-image {
+                min-height: 300px;
+            }
+            .skills-wrapper {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .skills-image {
+                min-height: 300px;
+            }
+            .reviews-grid {
+                grid-template-columns: 1fr;
             }
             .contact-wrapper {
                 grid-template-columns: 1fr;
@@ -401,14 +739,17 @@ if ($settings_result) {
 <body>
     <nav>
         <div class="nav-container">
-            <div class="logo">Ajay Roy</div>
+            <div class="logo">
+                <img src="images/logo.png" alt="Ajay Roy Logo">
+                <span class="logo-text">Ajay Roy</span>
+            </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="admin/" style="background: #667eea; padding: 0.5rem 1rem; border-radius: 4px;">Admin</a></li>
+                <li><a href="admin/" style="background: #0052CC; padding: 0.5rem 1rem; border-radius: 4px;">Admin</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -423,15 +764,25 @@ if ($settings_result) {
         <header>
             <h1>I am Ajay Roy</h1>
             <p>Digital Marketer & SEO Specialist</p>
-            <a href="tel:+9779745232233" class="btn">Hire Me Now!</a>
+            <a href="#services" class="cta-btn">Discover My Services ✨</a>
         </header>
     </section>
 
     <div class="container">
         <section class="intro">
-            <h2>Welcome</h2>
-            <p>I am an experienced SEO Specialist & SEO Expert in Nepal with Digital Marketing skills in driving organic traffic and optimizing online visibility. Proficient in keyword research, on-page/off-page optimization, and collaborative communication.</p>
-            <p>Explore how I can help grow your online presence and achieve your business goals through strategic digital marketing solutions.</p>
+            <div class="intro-text">
+                <h2>Welcome</h2>
+                <p>I am an experienced SEO Specialist & SEO Expert in Nepal with Digital Marketing skills in driving organic traffic and optimizing online visibility. Proficient in keyword research, on-page/off-page optimization, and collaborative communication.</p>
+                <p>Explore how I can help grow your online presence and achieve your business goals through strategic digital marketing solutions.</p>
+                <p>Explore how I can help grow your online presence and achieve your business goals through strategic digital marketing solutions.</p>
+                <p>Explore how I can help grow your online presence and achieve your business goals through strategic digital marketing solutions.</p>
+                <p>Explore how I can help grow your online presence and achieve your business goals through strategic digital marketing solutions.</p>
+                <p>Explore how I can help grow your online presence and achieve your business goals through strategic digital marketing solutions.</p>
+                <p>Explore how I can help grow your online presence and achieve your business goals through strategic digital marketing solutions.</p>
+            </div>
+            <div class="intro-image">
+                <img src="images/1.webp" alt="SEO and Digital Marketing">
+            </div>
         </section>
     </div>
 
@@ -447,24 +798,40 @@ if ($settings_result) {
                     <p>I'm Ajay Roy, an experienced SEO Specialist & Digital Marketing expert based in Nepal. With proven expertise in driving organic traffic, optimizing online visibility, and implementing strategic digital marketing campaigns, I help businesses achieve their online objectives.</p>
                     <p>My specialization includes comprehensive keyword research, on-page and off-page SEO optimization, digital marketing strategy, and collaborative communication with clients to ensure their business goals are met.</p>
                     <p>I believe in staying updated with the latest SEO trends and algorithm changes. When I'm not optimizing websites, you can find me analyzing market trends, implementing new strategies, or sharing knowledge about digital marketing best practices.</p>
-                    
-                    <div class="skills">
-                        <h3>My Skills</h3>
-                        <div id="skillsContainer">
-                            <!-- Skills will be loaded here via JavaScript -->
-                        </div>
-                    </div>
                 </div>
                 <div class="about-image">
-                    <div>
-                        <h3>Ajay Roy</h3>
-                        <p>SEO Specialist & Digital Marketer</p>
-                    </div>
+                    <img src="images/2.webp" alt="Ajay Roy">
+                </img>
+            </div>
+            </div>
+            <div class="section-highlight" style="margin-top: 2rem;">
+                <h4 style="color: #0052CC; margin-bottom: 1rem;">🎯 Let's Partner Together</h4>
+                <p>I'm committed to delivering measurable results and helping your business thrive in the digital landscape. Whether you're looking to improve your SEO, scale your marketing, or develop a comprehensive digital strategy, I'm here to help.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills">
+        <div class="section-header">
+            <h2>My Skills</h2>
+        </div>
+        <div class="container">
+            <div class="skills-wrapper">
+                <div class="skills-image">
+                    <img src="images/skill.png" alt="Skills">
+                </div>
+                <div id="skillsContainer">
+                    <!-- Skills will be loaded here via JavaScript -->
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Statistics Section -->
-            <div class="stats" id="statsContainer" style="margin-top: 3rem;">
+    <!-- STATISTICS SECTION -->
+    <section id="statistics">
+        <div class="container">
+            <div class="stats" id="statsContainer">
                 <!-- Stats will be loaded here via JavaScript -->
             </div>
         </div>
@@ -484,6 +851,11 @@ if ($settings_result) {
             <div class="grid" id="servicesContainer">
                 <!-- Services will be loaded here via JavaScript -->
             </div>
+            <div class="cta-section" style="margin-top: 3rem;">
+                <h3>Ready to Boost Your Online Presence?</h3>
+                <p>Let's work together to drive organic traffic and increase your conversions</p>
+                <a href="#contact" class="cta-btn">Get Started Today 🚀</a>
+            </div>
         </div>
     </section>
 
@@ -500,6 +872,24 @@ if ($settings_result) {
             </div>
             <div class="grid" id="portfolioContainer">
                 <!-- Portfolio items will be loaded here via JavaScript -->
+            </div>
+            <div class="cta-section" style="margin-top: 3rem;">
+                <h3>See What I Can Do For Your Business</h3>
+                <p>I have a proven track record of delivering results. Let's discuss your project today!</p>
+                <a href="#contact" class="cta-btn">Schedule a Free Consultation 📞</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS SECTION -->
+    <section id="reviews">
+        <div class="section-header">
+            <h2>Google Reviews</h2>
+            <p>What my clients say about me</p>
+        </div>
+        <div class="container">
+            <div class="reviews-grid" id="reviewsContainer">
+                <!-- Reviews will be loaded here via JavaScript -->
             </div>
         </div>
     </section>
@@ -546,7 +936,7 @@ if ($settings_result) {
                     </div>
                 </div>
                 <div style="background: #fafafa; padding: 2rem; border-radius: 8px;">
-                    <h3 style="color: #667eea; margin-bottom: 1.5rem;">Send Me a Message</h3>
+                    <h3 style="color: #0052CC; margin-bottom: 1.5rem;">Send Me a Message</h3>
                     <form id="contactForm" method="POST" action="process_contact.php">
                         <div id="formMessage"></div>
                         <div class="form-group">
@@ -579,6 +969,54 @@ if ($settings_result) {
     <footer>
         <p>&copy; 2026 Ajay Roy | <a href="#contact">Contact Me</a> | All rights reserved</p>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="javascript:void(0);" id="whatsappButton" class="whatsapp-float" title="Chat with us on WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004c-3.582 0-6.917-2.536-6.917-5.65C5.13 5.1 8.464 2.563 12.046 2.563c3.582 0 6.917 2.537 6.917 5.65 0 3.114-3.335 5.65-6.917 5.65m5.694-12.973C16.97.027 14.184 0 12.046 0 5.438 0 .149 5.175.149 11.5c0 2.047.529 4.04 1.528 5.783L.645 24l6.868-3.545c1.712.922 3.66 1.408 5.533 1.408 6.61 0 11.898-5.175 11.898-11.5 0-3.176-1.286-6.14-3.622-8.38"/>
+        </svg>
+    </a>
+
+    <script>
+        // WhatsApp Floating Button
+        document.addEventListener('DOMContentLoaded', function() {
+            const whatsappButton = document.getElementById('whatsappButton');
+            const whatsappNumber = '<?php echo isset($settings["whatsapp"]) ? preg_replace("/[^0-9+]/", "", htmlspecialchars($settings["whatsapp"])) : "+977 9745232233"; ?>';
+            
+            if (whatsappNumber) {
+                whatsappButton.href = 'https://wa.me/' + whatsappNumber.replace(/[^0-9+]/g, '') + '?text=Hello%20Ajay%20Roy!';
+                whatsappButton.target = '_blank';
+                whatsappButton.style.display = 'flex';
+            } else {
+                whatsappButton.style.display = 'none';
+            }
+
+            // Initialize Scroll Animations
+            initializeScrollAnimations();
+        });
+
+        // Scroll Animation Handler
+        function initializeScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animatable elements
+            document.querySelectorAll('.container, .card, .stat-item, .review-card, .intro-text, .intro-image, .about-text, .about-image, .skills-image, .contact-info, .cta-section').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+        }
+    </script>
 
     <script>
         // Load Services
@@ -640,12 +1078,84 @@ if ($settings_result) {
                 statsContainer.innerHTML = data.map(stat => `
                     <div class="stat-item">
                         <div style="font-size: 2rem; margin-bottom: 0.5rem;">${stat.icon}</div>
-                        <div class="stat-number">${stat.stat_value}+</div>
+                        <div class="stat-number" data-value="${stat.stat_value}">0+</div>
                         <div class="stat-label">${stat.stat_name}</div>
                     </div>
                 `).join('');
+                
+                // Initialize counter animations
+                initializeCounters();
             })
             .catch(error => console.error('Error loading statistics:', error));
+
+        // Counter Animation Function
+        function initializeCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                        animateCounter(entry.target);
+                        entry.target.classList.add('counted');
+                    }
+                });
+            }, observerOptions);
+            
+            counters.forEach(counter => observer.observe(counter));
+        }
+        
+        function animateCounter(element) {
+            const targetValue = parseInt(element.getAttribute('data-value'));
+            const duration = 2000; // 2 seconds
+            const steps = 60;
+            const increment = targetValue / steps;
+            let currentValue = 0;
+            let currentStep = 0;
+            
+            const interval = setInterval(() => {
+                currentStep++;
+                currentValue += increment;
+                
+                if (currentStep >= steps) {
+                    element.textContent = targetValue + '+';
+                    clearInterval(interval);
+                } else {
+                    element.textContent = Math.floor(currentValue) + '+';
+                }
+            }, duration / steps);
+        }
+
+        // Load Reviews from Google My Business
+        fetch('api/get_google_reviews.php')
+            .then(response => response.json())
+            .then(data => {
+                const reviewsContainer = document.getElementById('reviewsContainer');
+                if (data.error) {
+                    reviewsContainer.innerHTML = '<p style="text-align: center; color: #666;">Reviews not available. Please check admin settings.</p>';
+                } else if (data.length === 0) {
+                    reviewsContainer.innerHTML = '<p style="text-align: center; color: #666;">No reviews yet. Check back soon!</p>';
+                } else {
+                    reviewsContainer.innerHTML = data.map(review => `
+                        <div class="review-card" title="${review.source === 'google' ? 'From Google' : 'From local database'}">
+                            <div class="review-stars">${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}</div>
+                            <div class="review-rating">${review.rating}/5</div>
+                            <p class="review-text">"${review.review_text}"</p>
+                            <div class="review-author">${review.reviewer_name}</div>
+                            <div class="review-date">${new Date(review.review_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                            ${review.source === 'google' ? '<div style="font-size: 0.8rem; color: #0052CC; margin-top: 0.5rem;">✓ Verified Google Review</div>' : ''}
+                        </div>
+                    `).join('');
+                }
+            })
+            .catch(error => {
+                console.error('Error loading reviews:', error);
+                document.getElementById('reviewsContainer').innerHTML = '<p style="text-align: center; color: #d9534f;">Error loading reviews</p>';
+            });
 
         // Contact Form Handling
         document.getElementById('contactForm').addEventListener('submit', function(e) {

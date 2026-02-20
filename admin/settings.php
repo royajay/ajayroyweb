@@ -17,37 +17,76 @@ $error = '';
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $site_name = sanitize_input($_POST['site_name']);
-    $site_description = sanitize_input($_POST['site_description']);
-    $admin_email = sanitize_input($_POST['admin_email']);
-    $phone = sanitize_input($_POST['phone']);
-    $address = sanitize_input($_POST['address']);
-    $instagram_url = sanitize_input($_POST['instagram_url']);
-    $linkedin_url = sanitize_input($_POST['linkedin_url']);
-    $whatsapp = sanitize_input($_POST['whatsapp']);
-    
-    $updates = array();
-    
-    // Update each setting
-    $settings_data = array(
-        'site_name' => $site_name,
-        'site_description' => $site_description,
-        'admin_email' => $admin_email,
-        'phone' => $phone,
-        'address' => $address,
-        'instagram_url' => $instagram_url,
-        'linkedin_url' => $linkedin_url,
-        'whatsapp' => $whatsapp
-    );
-    
-    foreach ($settings_data as $key => $value) {
-        $stmt = $mysqli->prepare("UPDATE site_settings SET setting_value = ? WHERE setting_name = ?");
-        $stmt->bind_param('ss', $value, $key);
-        $stmt->execute();
-        $stmt->close();
+    if (isset($_POST['action']) && $_POST['action'] === 'test_google') {
+        // Test Google API Connection
+        $google_api_key = $settings['google_api_key'] ?? '';
+        $google_place_id = $settings['google_place_id'] ?? '';
+        
+        if (empty($google_api_key) || empty($google_place_id)) {
+            $error = '❌ Please save API key and Place ID first';
+        } else {
+            $url = "https://maps.googleapis.com/maps/api/place/details/json?place_id=" . urlencode($google_place_id) . "&key=" . urlencode($google_api_key) . "&fields=rating,reviews,name";
+            
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            
+            $response = curl_exec($ch);
+            $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+            
+            if ($http_code === 200) {
+                $data = json_decode($response, true);
+                if (isset($data['result']['reviews'])) {
+                    $review_count = count($data['result']['reviews']);
+                    $rating = $data['result']['rating'] ?? 'N/A';
+                    $place_name = $data['result']['name'] ?? 'Location';
+                    $message = '✅ Connection successful! | Place: ' . htmlspecialchars($place_name) . ' | Rating: ' . htmlspecialchars($rating) . ' | Reviews: ' . $review_count;
+                } else {
+                    $error = '❌ No reviews found for this place';
+                }
+            } else {
+                $error = '❌ Connection failed (HTTP ' . $http_code . '). Check your API key and Place ID.';
+            }
+        }
+    } else {
+        // Save settings
+        $site_name = sanitize_input($_POST['site_name']);
+        $site_description = sanitize_input($_POST['site_description']);
+        $admin_email = sanitize_input($_POST['admin_email']);
+        $phone = sanitize_input($_POST['phone']);
+        $address = sanitize_input($_POST['address']);
+        $instagram_url = sanitize_input($_POST['instagram_url']);
+        $linkedin_url = sanitize_input($_POST['linkedin_url']);
+        $whatsapp = sanitize_input($_POST['whatsapp']);
+        $google_api_key = sanitize_input($_POST['google_api_key'] ?? '');
+        $google_place_id = sanitize_input($_POST['google_place_id'] ?? '');
+        
+        // Update each setting
+        $settings_data = array(
+            'site_name' => $site_name,
+            'site_description' => $site_description,
+            'admin_email' => $admin_email,
+            'phone' => $phone,
+            'address' => $address,
+            'instagram_url' => $instagram_url,
+            'linkedin_url' => $linkedin_url,
+            'whatsapp' => $whatsapp,
+            'google_api_key' => $google_api_key,
+            'google_place_id' => $google_place_id
+        );
+        
+        foreach ($settings_data as $key => $value) {
+            $stmt = $mysqli->prepare("UPDATE site_settings SET setting_value = ? WHERE setting_name = ?");
+            $stmt->bind_param('ss', $value, $key);
+            $stmt->execute();
+            $stmt->close();
+        }
+        
+        $message = '✅ Settings updated successfully!';
     }
-    
-    $message = 'Settings updated successfully!';
 }
 
 // Get current settings
@@ -76,7 +115,7 @@ while ($row = $result->fetch_assoc()) {
             color: #333;
         }
         .admin-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(90deg, #0052CC 0%, #0066FF 100%);
             color: #fff;
             padding: 1rem 2rem;
             display: flex;
@@ -108,7 +147,7 @@ while ($row = $result->fetch_assoc()) {
             padding: 2rem;
         }
         .content-card h2 {
-            color: #667eea;
+            color: #0052CC;
             margin-bottom: 1.5rem;
         }
         .form-group {
@@ -120,7 +159,7 @@ while ($row = $result->fetch_assoc()) {
             border-bottom: 2px solid #f0f0f0;
         }
         .form-section h3 {
-            color: #667eea;
+            color: #0052CC;
             font-size: 1.1rem;
             margin-bottom: 1rem;
         }
@@ -146,7 +185,7 @@ while ($row = $result->fetch_assoc()) {
         input[type="tel"]:focus,
         textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #0052CC;
         }
         textarea {
             resize: vertical;
@@ -154,7 +193,7 @@ while ($row = $result->fetch_assoc()) {
         }
         .btn {
             padding: 0.8rem 2rem;
-            background: #667eea;
+            background: #0052CC;
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -164,7 +203,7 @@ while ($row = $result->fetch_assoc()) {
             transition: background 0.3s;
         }
         .btn:hover {
-            background: #764ba2;
+            background: #003d99;
         }
         .alert {
             padding: 1rem;
@@ -271,7 +310,36 @@ while ($row = $result->fetch_assoc()) {
                     </div>
                 </div>
 
-                <button type="submit" class="btn">💾 Save Settings</button>
+                <!-- Google Reviews API -->
+                <div class="form-section">
+                    <h3>🌐 Google My Business Reviews</h3>
+                    
+                    <div style="background: #f0f4ff; border-left: 4px solid #0052CC; padding: 15px; margin-bottom: 20px; border-radius: 4px;">
+                        <p><strong>✓ Pull reviews directly from your Google My Business profile</strong></p>
+                        <p style="font-size: 0.9rem; margin-top: 8px;">Need help? <a href="https://developers.google.com/maps/documentation/places/web-service" target="_blank" style="color: #0052CC;">View Setup Guide</a></p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="google_api_key">Google Places API Key</label>
+                        <input type="text" id="google_api_key" name="google_api_key" 
+                               placeholder="AIzaSyD...your-api-key-here..." 
+                               value="<?php echo htmlspecialchars($settings['google_api_key'] ?? ''); ?>">
+                        <small style="color: #666;">From: <a href="https://console.cloud.google.com/" target="_blank" style="color: #0052CC;">Google Cloud Console</a></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="google_place_id">Google Place ID</label>
+                        <input type="text" id="google_place_id" name="google_place_id" 
+                               placeholder="ChIJ...your-place-id-here..." 
+                               value="<?php echo htmlspecialchars($settings['google_place_id'] ?? ''); ?>">
+                        <small style="color: #666;">Find on <a href="https://www.google.com/maps" target="_blank" style="color: #0052CC;">Google Maps</a> → Search your business → Copy Place ID from URL</small>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button type="submit" class="btn">💾 Save Settings</button>
+                    <button type="submit" name="action" value="test_google" class="btn" style="background: #666;">🧪 Test Google Connection</button>
+                </div>
             </form>
         </div>
     </div>

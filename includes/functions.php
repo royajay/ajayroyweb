@@ -120,6 +120,11 @@ function get_dashboard_stats() {
     $row = $result->fetch_assoc();
     $stats['total_portfolio'] = $row['total'];
     
+    // Total reviews
+    $result = $mysqli->query("SELECT COUNT(*) as total FROM reviews WHERE active = 1");
+    $row = $result->fetch_assoc();
+    $stats['total_reviews'] = $row['total'];
+    
     return $stats;
 }
 

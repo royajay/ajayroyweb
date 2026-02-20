@@ -33,7 +33,7 @@ $stats = get_dashboard_stats();
             color: #333;
         }
         .admin-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(90deg, #0052CC 0%, #0066FF 100%);
             color: #fff;
             padding: 1rem 2rem;
             display: flex;
@@ -72,10 +72,10 @@ $stats = get_dashboard_stats();
             padding: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            border-top: 4px solid #667eea;
+            border-top: 4px solid #0052CC;
         }
         .stat-card h3 {
-            color: #667eea;
+            color: #0052CC;
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -201,6 +201,11 @@ $stats = get_dashboard_stats();
                 <div class="number"><?php echo $stats['total_portfolio']; ?></div>
                 <div class="description">Project showcases</div>
             </div>
+            <div class="stat-card">
+                <h3>⭐ Google Reviews</h3>
+                <div class="number"><?php echo $stats['total_reviews']; ?></div>
+                <div class="description">Client testimonials</div>
+            </div>
         </div>
 
         <!-- Management Menu -->
@@ -212,6 +217,8 @@ $stats = get_dashboard_stats();
                 <a href="portfolio.php" class="menu-btn">📁 Manage Portfolio</a>
                 <a href="skills.php" class="menu-btn">💡 Manage Skills</a>
                 <a href="statistics.php" class="menu-btn">📊 Manage Stats</a>
+                <a href="reviews.php" class="menu-btn">⭐ Manage Reviews</a>
+                <a href="google_settings.php" class="menu-btn">🌐 Google Reviews API</a>
                 <a href="settings.php" class="menu-btn">⚙️ Site Settings</a>
             </div>
         </div>
