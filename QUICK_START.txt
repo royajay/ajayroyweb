@@ -1,0 +1,282 @@
+================================================================================
+                    AJAY ROY - PORTFOLIO WEBSITE
+                         QUICK START GUIDE
+================================================================================
+
+📁 PROJECT FOLDER: C:\AjayRoy-Website-PHP\
+
+================================================================================
+🚀 QUICK START (LOCAL DEVELOPMENT)
+================================================================================
+
+1. START YOUR LOCAL SERVER
+   ├─ XAMPP: Open XAMPP Control Panel → Start Apache & MySQL
+   ├─ WAMP: Click system tray icon (should be green)
+   └─ Other: Start your web server appropriately
+
+2. CREATE DATABASE
+   ├─ Open: http://localhost/phpmyadmin/
+   ├─ Create database: ajay_roy_portfolio
+   ├─ Import: C:\AjayRoy-Website-PHP\database.sql
+   └─ Verify: Tables should appear (services, portfolio, skills, etc)
+
+3. UPDATE DATABASE CONFIG (if needed)
+   ├─ Edit: includes/config.php
+   └─ Update DB_USER, DB_PASS, DB_NAME to match your setup
+
+4. OPEN WEBSITE
+   ├─ Browser: http://localhost/AjayRoy-Website-PHP/
+   ├─ Should see: Ajay Roy homepage with purple gradient
+   └─ Check: Services, portfolio, skills sections load
+
+5. LOGIN TO ADMIN
+   ├─ Go to: http://localhost/AjayRoy-Website-PHP/admin/login.php
+   ├─ Username: admin
+   ├─ Password: admin123
+   └─ Click: Login
+
+6. YOU'RE DONE!
+   └─ Start editing your content in the Admin Panel
+
+================================================================================
+📋 DEFAULT ADMIN CREDENTIALS
+================================================================================
+
+Username: admin
+Password: admin123
+
+⚠️  CHANGE THESE IMMEDIATELY ON LIVE SERVER!
+
+================================================================================
+📂 IMPORTANT FILES & FOLDERS
+================================================================================
+
+index.php                    → Main website (homepage)
+process_contact.php         → Contact form handler
+includes/config.php         → Database configuration
+includes/functions.php      → Helper functions
+
+admin/login.php             → Admin login page
+admin/dashboard.php         → Admin control panel
+admin/services.php          → Manage services
+admin/portfolio.php         → Manage portfolio items
+admin/skills.php            → Manage skills
+admin/contacts.php          → View contact submissions
+admin/statistics.php        → Manage key metrics
+admin/settings.php          → Configure site settings
+
+api/get_services.php        → API: Services data
+api/get_portfolio.php       → API: Portfolio data
+api/get_skills.php          → API: Skills data
+api/get_statistics.php      → API: Statistics data
+
+database.sql                → Database schema & initial data
+
+================================================================================
+🔍 COMMON TASKS
+================================================================================
+
+MANAGE SERVICES
+→ Go to Admin Panel → Manage Services
+→ Add/Edit/Delete your offered services
+→ Changes appear instantly on homepage
+
+MANAGE PORTFOLIO
+→ Go to Admin Panel → Manage Portfolio
+→ Add/Edit/Delete your project showcases
+→ Categorize by SEO, Digital Marketing, etc.
+
+MANAGE SKILLS
+→ Go to Admin Panel → Manage Skills
+→ Add your professional skills with proficiency %
+→ Displays with progress bars on homepage
+
+VIEW CONTACT SUBMISSIONS
+→ Go to Admin Panel → View Contacts
+→ See all visitor messages
+→ Mark as read/delete
+
+CONFIGURE SITE SETTINGS
+→ Go to Admin Panel → Site Settings
+→ Update site name, description
+→ Add contact info, social media links
+→ Changes reflect throughout website
+
+================================================================================
+⚙️  CONFIGURATION
+================================================================================
+
+DATABASE
+File: includes/config.php
+Update these to match YOUR setup:
+  define('DB_HOST', 'localhost');
+  define('DB_USER', 'root');          ← Your MySQL username
+  define('DB_PASS', '');               ← Your MySQL password
+  define('DB_NAME', 'ajay_roy_portfolio'); ← Your database name
+
+ADMIN PANEL ACCESS
+URL: http://localhost/AjayRoy-Website-PHP/admin/login.php
+Default: admin / admin123
+
+SITE NAME & DESCRIPTION
+Admin Panel → Settings → Site Information
+(Stored in database, not hardcoded)
+
+================================================================================
+❓ TROUBLESHOOTING
+================================================================================
+
+PROBLEM: "Connection refused" or blank page
+SOLUTION:
+  1. Ensure Apache AND MySQL are both running
+  2. Wait 2-3 seconds after starting server
+  3. Try: http://localhost (should show server page)
+  4. Check folder is in correct location
+
+PROBLEM: "Access denied for user root@localhost"
+SOLUTION:
+  1. Your MySQL password doesn't match config.php
+  2. Check what password XAMPP/WAMP uses
+  3. Update DB_PASS in includes/config.php
+
+PROBLEM: Admin login doesn't work
+SOLUTION:
+  1. Clear browser cookies (Ctrl+Shift+Delete)
+  2. Try incognito/private window
+  3. Verify database was imported correctly
+  4. Default password is exactly: admin123
+
+PROBLEM: Sections (services, portfolio) not showing
+SOLUTION:
+  1. Database wasn't imported properly
+  2. Check phpMyAdmin for tables with data
+  3. Try importing database.sql again
+  4. Check browser console (F12) for errors
+
+TROUBLESHOOTING STEPS:
+  1. Check error logs in your server control panel
+  2. Open browser console (F12 → Console tab) for errors
+  3. Verify all files uploaded/exist
+  4. Restart your local server
+  5. Clear browser cache
+
+================================================================================
+📖 DOCUMENTATION
+================================================================================
+
+README.md           → Full project overview and features
+INSTALLATION.md    → Detailed local setup instructions
+DEPLOYMENT.md      → How to deploy to cPanel/live server
+This file          → Quick reference guide
+
+================================================================================
+🌐 GOING LIVE (DEPLOYING TO HOSTING)
+================================================================================
+
+1. Get hosting with:
+   ✓ PHP 7.4+ support
+   ✓ MySQL 5.7+ support
+   ✓ cPanel access (recommended)
+
+2. Follow DEPLOYMENT.md guide:
+   ✓ Create database on hosting
+   ✓ Upload files via FTP
+   ✓ Update includes/config.php
+   ✓ Import database.sql
+   ✓ Enable HTTPS/SSL
+   ✓ Change admin password
+
+3. Test everything works on live server
+
+4. Announce to the world! 🎉
+
+================================================================================
+📞 QUICK CONTACTS
+================================================================================
+
+Default Admin Email:    admin@rayajay.com.np
+Default Phone:         +977 9745232233
+Website:               https://rayajay.com.np/
+
+================================================================================
+✅ CHECKLIST - BEFORE GOING LIVE
+================================================================================
+
+LOCAL TESTING:
+  □ Website shows correctly at http://localhost/AjayRoy-Website-PHP/
+  □ Admin panel login works
+  □ Can add/edit services
+  □ Can add/edit portfolio items
+  □ Contact form submits successfully
+  □ No errors in browser console (F12)
+
+HOSTING SETUP:
+  □ Bought domain and hosting with PHP 7.4+ & MySQL
+  □ Created database on hosting
+  □ Uploaded all files via FTP
+  □ Updated includes/config.php with hosting DB credentials
+  □ Imported database.sql on hosting
+  □ Website accessible at domain.com
+
+SECURITY:
+  □ Changed admin password from default
+  □ Enabled HTTPS/SSL certificate
+  □ Set proper file permissions (755 for folders)
+  □ Backed up database (off-site)
+  □ Hidden error displays from public (show to admin only)
+
+CONTENT:
+  □ Updated all services
+  □ Added portfolio projects
+  □ Updated skills with proficiency levels
+  □ Configured contact email address
+  □ Added social media links
+  □ Updated statistics/metrics
+
+FINAL:
+  □ Tested contact form submission
+  □ Tested on mobile phone
+  □ All links working
+  □ No broken images
+  □ Ready to share!
+
+================================================================================
+🎯 NEXT STEPS
+================================================================================
+
+1. Read the full README.md for complete understanding
+2. Customize all your content in the Admin panel
+3. Test everything thoroughly
+4. When ready, follow DEPLOYMENT.md to go live
+5. Keep backups of your database regularly
+
+================================================================================
+👨‍💼 ABOUT THIS PROJECT
+================================================================================
+
+This is a complete, production-ready website for Ajay Roy - SEO Specialist.
+Features include:
+  • Professional portfolio showcase
+  • Fully functional admin panel
+  • MySQL database backend
+  • Mobile responsive design
+  • Contact form with submissions
+  • Security features (SQL injection prevention, XSS protection)
+  • Easy to customize and deploy
+
+Built with:
+  • PHP 7.4+
+  • MySQL 5.7+
+  • Vanilla JavaScript (no frameworks)
+  • CSS3 with modern gradient design
+
+================================================================================
+
+Questions? Review the documentation files:
+  → README.md (overview)
+  → INSTALLATION.md (setup help)
+  → DEPLOYMENT.md (live hosting)
+
+Good luck! 🚀
+
+================================================================================

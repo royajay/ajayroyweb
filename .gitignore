@@ -1,0 +1,82 @@
+# Git Ignore File for Ajay Roy Portfolio Website
+
+# Database files (keep local backups separately)
+*.sql
+database_backup.sql
+*.db
+*.sqlite
+
+# Local configuration (may contain sensitive data)
+includes/config.php.local
+includes/.env
+.env
+.env.local
+.env.*.local
+
+# IDE and Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.bak
+*.backup
+
+# Node modules (if added)
+node_modules/
+npm-debug.log
+
+# Composer (if added)
+vendor/
+composer.lock
+
+# Build and distribution
+dist/
+build/
+*.zip
+*.tar.gz
+*.rar
+
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+
+# Session files
+sessions/
+*.session
+
+# Upload directories (when added)
+uploads/
+files/
+media/
+
+# Caches
+cache/
+/cache/*
+.cache
+
+# Testing
+tests/coverage/
+.phpunit.result.cache
+
+# Documentation (optional - keep in repo)
+# INSTALLATION.md
+# DEPLOYMENT.md
+# README.md
+
+# Local development only
+local_config.php
+test_*.php
+debug.php

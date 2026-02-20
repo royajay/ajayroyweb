@@ -1,0 +1,136 @@
+# Apache Configuration for Ajay Roy Portfolio Website
+
+# Enable Rewrite Engine
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  
+  # HTTPS Redirect (uncomment when deploying with SSL)
+  # RewriteCond %{HTTPS} off
+  # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  
+  # Redirect www to non-www (optional)
+  # RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+  # RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+</IfModule>
+
+# Enable Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE application/json
+</IfModule>
+
+# Browser Caching
+<IfModule mod_expires.c>
+  ExpiresActive On
+  
+  # Default to 24 hours
+  ExpiresDefault "access plus 24 hours"
+  
+  # Cache HTML for 1 hour (so updates are seen relatively quickly)
+  ExpiresByType text/html "access 1 hour"
+  
+  # Cache CSS and JS for 30 days
+  ExpiresByType text/css "access 30 days"
+  ExpiresByType application/javascript "access 30 days"
+  ExpiresByType text/javascript "access 30 days"
+  
+  # Cache images for 60 days
+  ExpiresByType image/jpeg "access 60 days"
+  ExpiresByType image/gif "access 60 days"
+  ExpiresByType image/png "access 60 days"
+  ExpiresByType image/webp "access 60 days"
+  ExpiresByType image/svg+xml "access 60 days"
+  ExpiresByType image/x-icon "access 60 days"
+  
+  # Cache fonts for 60 days
+  ExpiresByType font/ttf "access 60 days"
+  ExpiresByType font/otf "access 60 days"
+  ExpiresByType font/woff "access 60 days"
+  ExpiresByType font/woff2 "access 60 days"
+  ExpiresByType application/font-woff "access 60 days"
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+  # Prevent clickjacking
+  Header always append X-Frame-Options "SAMEORIGIN"
+  
+  # Prevent MIME type sniffing
+  Header always append X-Content-Type-Options "nosniff"
+  
+  # Enable XSS protection
+  Header always append X-XSS-Protection "1; mode=block"
+  
+  # Referrer Policy
+  Header always append Referrer-Policy "strict-origin-when-cross-origin"
+  
+  # Remove server identification
+  Header always append Server "Web Server"
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Deny access to hidden files and directories
+<FilesMatch "^\.">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Protect sensitive files
+<FilesMatch "\.(sql|env|config|conf|json)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Allow access to specific files only
+<FilesMatch "\.php$">
+  <IfModule mod_authz_core.c>
+    Require all granted
+  </IfModule>
+</FilesMatch>
+
+# Disable PHP execution in uploads and temp directories (if you add those)
+# <Directory "uploads">
+#   php_flag engine off
+# </Directory>
+
+# UTF-8 Encoding
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .html .htm .php .xml .css .js .json
+
+# Set correct MIME types
+AddType application/javascript js
+AddType text/css css
+AddType application/json json
+AddType application/xml xml
+AddType image/svg+xml svg svgz
+
+# Handle missing pages
+# ErrorDocument 404 /404.html
+# ErrorDocument 403 /403.html
+# ErrorDocument 500 /500.html
+
+# Block access to certain tools
+<FilesMatch "(phpmyadmin|wp-admin|wp-login)">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+</FilesMatch>
