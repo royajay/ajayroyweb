@@ -51,7 +51,7 @@ if ($settings_result) {
         
         </div>
         <div class="intro-image">
-            <img src="images/3.png" alt="SEO and Digital Marketing">
+            <img src="images/1.png" alt="SEO and Digital Marketing">
         </div>
     </section>
 </div>
@@ -67,10 +67,10 @@ if ($settings_result) {
                 <h3>Who Am I?</h3>
                 <p>I'm Ajay Roy, an experienced SEO Specialist & Digital Marketing expert based in Nepal. With proven expertise in driving organic traffic, optimizing online visibility, and implementing strategic digital marketing campaigns, I help businesses achieve their online objectives.</p>
                 <p>My specialization includes comprehensive keyword research, on-page and off-page SEO optimization, digital marketing strategy, and collaborative communication with clients to ensure their business goals are met.</p>
-                <p>I believe in staying updated with the latest SEO trends and algorithm changes. When I'm not optimizing websites, you can find me analyzing market trends, implementing new strategies, or sharing knowledge about digital marketing best practices.</p>
+                <!-- <p>I believe in staying updated with the latest SEO trends and algorithm changes. When I'm not optimizing websites, you can find me analyzing market trends, implementing new strategies, or sharing knowledge about digital marketing best practices.</p> -->
             </div>
             <div class="about-image">
-                <img src="images/1.png" alt="Ajay Roy">
+                <img src="images/5.png" alt="Ajay Roy">
             </div>
         </div>
         <div class="section-highlight" style="margin-top: 2rem;">
@@ -88,7 +88,7 @@ if ($settings_result) {
     <div class="container">
         <div class="skills-wrapper">
             <div class="skills-image">
-                <img src="images/skill.png" alt="Skills">
+                <img src="images/3.png" alt="Skills">
             </div>
             <div id="skillsContainer">
                 <!-- Skills will be loaded here via JavaScript -->
